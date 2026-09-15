@@ -29,21 +29,49 @@ export function DeploymentCard({ serviceName, status, lastUpdated }: DeploymentC
 
   // Step 5: Return the HTML (called JSX)
   return (
-    <div style={{ border: "1px solid #ccc", padding: "16px", marginBottom: "12px" }}>
+    <div style={{ 
+      border: "1px solid #e5e7eb", 
+      padding: "16px", 
+      marginBottom: "12px",
+      borderRadius: "6px",
+      backgroundColor: "white",
+      boxShadow: "0 1px 2px rgba(0,0,0,0.05)"
+    }}>
+
       <h3>{serviceName}</h3>
       <p>
-        Status: <span style={{ color: statusColor, fontWeight: "bold" }}>{status}</span>
+        Status: <span style={{ 
+          color: statusColor === "green" ? "#065f46" : statusColor === "red" ? "#7f1d1d" : "#78350f",
+          backgroundColor: statusColor === "green" ? "#d1fae5" : statusColor === "red" ? "#fee2e2" : "#fef3c7",
+          padding: "4px 8px",
+          borderRadius: "4px",
+          fontSize: "12px",
+          fontWeight: "500"
+        }}>{status}</span>
+
       </p>
       <p>Last updated: {lastUpdated}</p>
+        <button 
+          onClick={handleRefresh}
+          disabled={isLoading}
+          style={{ 
+            backgroundColor: isLoading ? "#e5e7eb" : "#f3f4f6",
+            color: "#1f2937",
+            border: "1px solid #d1d5db",
+            borderRadius: "4px",
+            padding: "8px 12px",
+            fontSize: "14px",
+            fontWeight: "500",
+            cursor: isLoading ? "not-allowed" : "pointer",
+            transition: "background-color 0.2s ease",
+            marginTop: "12px"
+          }}
+        >
+          {isLoading ? "Loading..." : "Refresh"}
+        </button>
 
-      <button 
-  onClick={handleRefresh}
-  disabled={isLoading}
-  style={{ padding: "8px 16px", cursor: isLoading ? "not-allowed" : "pointer" }}
->
-  {isLoading ? "Loading..." : "Refresh"}
-</button>
 
     </div>
   );
+
 }

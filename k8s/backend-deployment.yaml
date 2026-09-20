@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: platform-pilot-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-pilot-backend
+  template:
+    metadata:
+      labels:
+        app: platform-pilot-backend
+    spec:
+      containers:
+      - name: backend
+        image: platform-pilot-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: NODE_ENV
+          value: "production"

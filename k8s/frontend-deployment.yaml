@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: platform-pilot-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-pilot-frontend
+  template:
+    metadata:
+      labels:
+        app: platform-pilot-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: platform-pilot-frontend:latest
+        ports:
+        - containerPort: 3000

@@ -13,8 +13,12 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Build the React app
-RUN npm run build
+COPY . .
+
+# Build the React app with backend service URL
+ARG REACT_APP_API_URL=http://backend-service:5000
+RUN REACT_APP_API_URL=$REACT_APP_API_URL npm run build
+
 
 # Install a simple web server to serve the built app
 RUN npm install -g serve

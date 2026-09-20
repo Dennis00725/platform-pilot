@@ -10,16 +10,16 @@ interface DeploymentCardProps {
 }
 
 // Step 3: Create the component function
-export function DeploymentCard({ serviceName, status, lastUpdated }: DeploymentCardProps) {
+export function DeploymentCard({ serviceName, status, lastUpdated, onRefresh }: DeploymentCardProps & { onRefresh: () => void }) {
   
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleRefresh = () => {
+const handleRefresh = async () => {
   setIsLoading(true);
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
+  await onRefresh();
+  setIsLoading(false);
 };
+
 
   // Step 4: Decide the color based on status
   const statusColor = 
